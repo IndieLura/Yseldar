@@ -2,23 +2,31 @@ package _47b3n.projectgame.engine;
 
 import java.awt.Graphics;
 
-import _47b3n.projectgame.engine.gamestate.GameStateHandler;
+import _47b3n.projectgame.engine.gamestate.GameState;
 import _47b3n.projectgame.engine.gamestate.gamestates.InGame;
 
 public class Handler {
-
-	private GameStateHandler gameStateHandler;
+	
+	private GameState gameState;
 	
 	public Handler() {
-		gameStateHandler = new GameStateHandler(new InGame());
+		setGameState(new InGame());
 	}
 	
 	public void tick() {
-		gameStateHandler.tick();
+		gameState.tick();
 	}
 	
 	public void render(Graphics g) {
-		gameStateHandler.render(g);
+		gameState.render(g);
+	}
+	
+	public void setGameState(GameState gameState) {
+		this.gameState = gameState;
+	}
+	
+	public GameState getGameState() {
+		return gameState;
 	}
 	
 }

@@ -7,4 +7,8 @@ public abstract class GameState {
 	public abstract void tick();
 	public abstract void render(Graphics g);
 	
+	@Override
+	public String toString() {
+		return getClass().getName();
+	}
 }

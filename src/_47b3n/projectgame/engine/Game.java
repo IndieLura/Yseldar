@@ -10,6 +10,8 @@ public class Game extends Canvas implements Runnable {
 	
 	private String title = getClass().getName();
 	
+	public static int WIDTH, HEIGHT;
+	
 	private Thread thread;
 	private boolean running = false;
 	
@@ -20,6 +22,9 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	private void init() {
+		WIDTH = getWidth();
+		HEIGHT = getHeight();
+		
 		handler = new Handler();
 	}
 	
