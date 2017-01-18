@@ -4,6 +4,8 @@ import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import _47b3n.projectgame.engine.input.MouseInput;
+
 public class Game extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = -1650647469312364898L;
@@ -26,6 +28,8 @@ public class Game extends Canvas implements Runnable {
 		HEIGHT = getHeight();
 		
 		handler = new Handler();
+		
+		addMouseListener(new MouseInput(handler));
 	}
 	
 	@Override
