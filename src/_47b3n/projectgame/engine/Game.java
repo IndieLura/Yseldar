@@ -1,23 +1,30 @@
 package _47b3n.projectgame.engine;
 
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 
 public class Game extends Canvas implements Runnable {
 
+	private static final long serialVersionUID = -1650647469312364898L;
+	
+	private String title = getClass().getName();
+	
+	public static int WIDTH, HEIGHT;
+	
 	private Thread thread;
 	private boolean running = false;
 	
 	private Handler handler;
 	
 	public Game() {
-		new Window("ISLAM", 800, 600, this);
+		new Window(title, 800, 600, this);
 	}
 
 	private void init() {
+		WIDTH = getWidth();
+		HEIGHT = getHeight();
+		
 		handler = new Handler();
 	}
 	
@@ -67,7 +74,7 @@ public class Game extends Canvas implements Runnable {
 			return;
 		}
 		Graphics g = bs.getDrawGraphics();
-		Graphics2D g2d = (Graphics2D) g;
+		//Graphics2D g2d = (Graphics2D) g;
 
 		handler.render(g);
 
