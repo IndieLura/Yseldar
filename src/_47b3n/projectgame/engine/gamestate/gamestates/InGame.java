@@ -8,6 +8,7 @@ import java.awt.RenderingHints;
 
 import _47b3n.projectgame.engine.Game;
 import _47b3n.projectgame.engine.gamestate.GameState;
+import _47b3n.projectgame.game.PietBlokje;
 
 public class InGame extends GameState {
 
@@ -15,13 +16,17 @@ public class InGame extends GameState {
 	
 	private Font fontHud;
 	
+	public PietBlokje blok;
+	
 	public InGame() {
 		fontHud = new Font("Verdana", Font.PLAIN, 12);
+		blok = new PietBlokje(10, 10);
 	}
 	
 	@Override
 	public void tick() {
 		score+= 0.1;
+		blok.tick();
 	}
 
 	@Override
@@ -35,7 +40,7 @@ public class InGame extends GameState {
 		//END OF BACKGROUND
 		
 		//DRAW FROM HERE
-		
+		blok.render(g);
 		//TO HERE
 		
 		//START OF HUD

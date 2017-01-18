@@ -8,9 +8,12 @@ import _47b3n.projectgame.engine.gamestate.gamestates.InGame;
 public class Handler {
 	
 	private GameState gameState;
+	public InGame inGame;
+	
 	
 	public Handler() {
-		setGameState(new InGame());
+		inGame = new InGame();
+		setGameState(inGame);
 	}
 	
 	public void tick() {

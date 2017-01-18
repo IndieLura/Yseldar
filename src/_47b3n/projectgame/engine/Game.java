@@ -4,6 +4,7 @@ import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import _47b3n.projectgame.engine.input.KeyInput;
 import _47b3n.projectgame.engine.input.MouseInput;
 
 public class Game extends Canvas implements Runnable {
@@ -29,6 +30,7 @@ public class Game extends Canvas implements Runnable {
 		
 		handler = new Handler();
 		
+		addKeyListener(new KeyInput(handler));
 		addMouseListener(new MouseInput(handler));
 	}
 	
