@@ -4,25 +4,43 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 
+import _47b3n.projectgame.engine.Game;
+
 public class PietBlokje {
 
 	private int x, y, velX, velY;
-	
+	private int speed = 5;
+	private Color color;
+
 	public PietBlokje(int x, int y) {
 		this.x = x;
 		this.y = y;
-		velX = new Random().nextInt(10) - 5;
-		velY = new Random().nextInt(10) - 5;
+		velX = (new Random().nextInt(50) - 25) + 2;
+		velY = (new Random().nextInt(50) - 25) + 2;
+		color = new Color(new Random().nextInt(255), new Random().nextInt(255), new Random().nextInt(255), new Random().nextInt(155) + 100);
 	}
-	
+
 	public void tick() {
 		x += velX;
 		y += velY;
+
+		if (x + 32 > Game.WIDTH) {
+			setVelX(-speed);
+		}
+		if (x < 0) {
+			setVelX(speed);
+		}
+		if (y + 32 > Game.HEIGHT) {
+			setVelY(-speed);
+		}
+		if (y < 0) {
+			setVelY(speed);
+		}
 	}
-	
+
 	public void render(Graphics g) {
-		g.setColor(Color.BLUE);
-		g.fillRect(x, y, 32, 32);
+		g.setColor(color);
+		g.fillOval(x, y, 32, 32);
 	}
 
 	public int getX() {
@@ -56,5 +74,5 @@ public class PietBlokje {
 	public void setVelY(int velY) {
 		this.velY = velY;
 	}
-	
+
 }

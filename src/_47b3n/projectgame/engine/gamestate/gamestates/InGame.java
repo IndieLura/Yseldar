@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.util.LinkedList;
+import java.util.Random;
 
 import _47b3n.projectgame.engine.Game;
 import _47b3n.projectgame.engine.gamestate.GameState;
@@ -16,17 +18,21 @@ public class InGame extends GameState {
 	
 	private Font fontHud;
 	
-	public PietBlokje blok;
+	private LinkedList<PietBlokje> blokjes = new LinkedList<PietBlokje>();
 	
 	public InGame() {
 		fontHud = new Font("Verdana", Font.PLAIN, 12);
-		blok = new PietBlokje(10, 10);
+		for (int i = 0; i < 100; i++) {
+			blokjes.add(new PietBlokje(new Random().nextInt(Game.WIDTH - 50), new Random().nextInt(Game.HEIGHT - 50)));
+		}
 	}
 	
 	@Override
 	public void tick() {
 		score+= 0.1;
-		blok.tick();
+		for (int i = 0; i < blokjes.size(); i++) {
+			blokjes.get(i).tick();
+		}
 	}
 
 	@Override
@@ -40,7 +46,9 @@ public class InGame extends GameState {
 		//END OF BACKGROUND
 		
 		//DRAW FROM HERE
-		blok.render(g);
+		for (int i = 0; i < blokjes.size(); i++) {
+			blokjes.get(i).render(g);
+		}
 		//TO HERE
 		
 		//START OF HUD
