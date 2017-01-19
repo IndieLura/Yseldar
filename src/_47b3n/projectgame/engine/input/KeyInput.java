@@ -17,18 +17,10 @@ public class KeyInput implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		
-		/*if (key == KeyEvent.VK_W) {
-			handler.inGame.blok.setVelY(-1);
+		if (key == KeyEvent.VK_ESCAPE) {
+			System.out.println("Exiting..");
+			System.exit(1);
 		}
-		if (key == KeyEvent.VK_A) {
-			handler.inGame.blok.setVelX(-1);
-		}
-		if (key == KeyEvent.VK_S) {
-			handler.inGame.blok.setVelY(1);
-		}
-		if (key == KeyEvent.VK_D) {
-			handler.inGame.blok.setVelX(1);
-		}*/
 		
 	}
 

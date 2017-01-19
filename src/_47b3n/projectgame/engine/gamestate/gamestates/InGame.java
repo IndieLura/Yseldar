@@ -13,8 +13,6 @@ import _47b3n.projectgame.engine.gamestate.GameState;
 import _47b3n.projectgame.game.PietBlokje;
 
 public class InGame extends GameState {
-
-	private float score = 0;
 	
 	private Font fontHud;
 	
@@ -29,7 +27,6 @@ public class InGame extends GameState {
 	
 	@Override
 	public void tick() {
-		score+= 0.1;
 		for (int i = 0; i < blokjes.size(); i++) {
 			blokjes.get(i).tick();
 		}
@@ -54,7 +51,7 @@ public class InGame extends GameState {
 		//START OF HUD
 		g.setColor(Color.BLACK);
 		g.setFont(fontHud);
-		g.drawString("SCORE: " + (int) score, 10, 20);
+		g.drawString("SCORE: ", 10, 20);
 		//END OF HUD
 	}
 
