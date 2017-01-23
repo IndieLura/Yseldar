@@ -22,6 +22,7 @@ public class Player {
 
 	private BufferedImage texture;
 
+	@SuppressWarnings("unused")
 	private InGame inGame;
 	private LinkedList<Entity> entities;
 
