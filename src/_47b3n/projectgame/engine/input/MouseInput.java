@@ -16,7 +16,7 @@ public class MouseInput implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getButton() == MouseEvent.BUTTON1) {
-			System.out.println(handler.getGameState().toString());
+			System.out.println("The gamestate is: '" + handler.getGameState().toString() + "' because you clicked.");
 		}
 	}
 

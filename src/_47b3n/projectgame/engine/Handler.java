@@ -8,8 +8,7 @@ import _47b3n.projectgame.engine.gamestate.gamestates.InGame;
 public class Handler {
 	
 	private GameState gameState;
-	public InGame inGame;
-	
+	private InGame inGame;
 	
 	public Handler() {
 		inGame = new InGame();
@@ -30,6 +29,10 @@ public class Handler {
 	
 	public GameState getGameState() {
 		return gameState;
+	}
+	
+	public InGame getInGame() {
+		return inGame;
 	}
 	
 }
