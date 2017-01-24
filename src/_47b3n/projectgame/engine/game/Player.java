@@ -19,7 +19,7 @@ public class Player {
 	private float x, y;
 	private float velX, velY;
 	private float width = 32, height = 32;
-	private float speed = 16;
+	private float speed = 2;
 
 	private BufferedImage texture;
 

@@ -30,12 +30,14 @@ public class InGame extends GameState {
 	private Camera cam;
 
 	private int level = 1;
+	private int maxLevel = 2;
 
 	public LinkedList<Entity> entities = new LinkedList<Entity>();
 
 	public InGame() {
 		BufferedImage level1 = ImageLoader.loadImage("/levels/level1.bmp");
 		loadLevel(level1);
+		System.out.println("/levels/level" + level + ".bmp");
 
 		fontHud = new Font("Verdana", Font.PLAIN, 12);
 		cam = new Camera(0, 0);
@@ -107,9 +109,9 @@ public class InGame extends GameState {
 	public void levelUp() {
 		level++;
 
-		entities.clear();
-		if (level <= 2) {
-			player = null;
+		if (level <= maxLevel) {
+			entities.clear();
+
 			BufferedImage levelImg = ImageLoader.loadImage("/levels/level" + level + ".bmp");
 			System.out.println("/levels/level" + level + ".bmp");
 			loadLevel(levelImg);
