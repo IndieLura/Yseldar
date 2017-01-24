@@ -7,6 +7,7 @@ import java.util.LinkedList;
 
 import _47b3n.projectgame.engine.game.object.Entity;
 import _47b3n.projectgame.engine.game.object.EntityID;
+import _47b3n.projectgame.engine.game.object.objects.LevelEnd;
 import _47b3n.projectgame.engine.game.object.objects.StoneBlock;
 import _47b3n.projectgame.engine.game.object.objects.Tree;
 import _47b3n.projectgame.engine.gamestate.gamestates.InGame;
@@ -18,7 +19,7 @@ public class Player {
 	private float x, y;
 	private float velX, velY;
 	private float width = 32, height = 32;
-	private float speed = 5;
+	private float speed = 16;
 
 	private BufferedImage texture;
 
@@ -48,43 +49,51 @@ public class Player {
 					y = block.getY() + block.getHeight();
 					velY = 0;
 				}
-				
+
 				if (getBoundsBottom().intersects(block.getBounds())) {
 					y = block.getY() - block.getHeight();
 					velY = 0;
 				}
-				
+
 				if (getBoundsLeft().intersects(block.getBounds())) {
 					x = block.getX() + block.getWidth();
 					velX = 0;
 				}
-				
+
 				if (getBoundsRight().intersects(block.getBounds())) {
 					x = block.getX() - block.getWidth();
 					velX = 0;
 				}
 			}
-			
+
 			if (entities.get(i).getID() == EntityID.Tree) {
 				Tree tree = (Tree) entities.get(i);
 				if (getBoundsTop().intersects(tree.getBounds())) {
 					y = tree.getY() + tree.getHeight();
 					velY = 0;
 				}
-				
+
 				if (getBoundsBottom().intersects(tree.getBounds())) {
 					y = tree.getY() - tree.getHeight();
 					velY = 0;
 				}
-				
+
 				if (getBoundsLeft().intersects(tree.getBounds())) {
 					x = tree.getX() + tree.getWidth();
 					velX = 0;
 				}
-				
+
 				if (getBoundsRight().intersects(tree.getBounds())) {
 					x = tree.getX() - tree.getWidth();
 					velX = 0;
+				}
+			}
+
+			if (entities.get(i).getID() == EntityID.LevelEnd) {
+				LevelEnd end = (LevelEnd) entities.get(i);
+
+				if (getBounds().intersects(end.getBounds())) {
+					inGame.levelUp();
 				}
 			}
 		}
@@ -140,6 +149,10 @@ public class Player {
 
 	public void setSpeed(int speed) {
 		this.speed = speed;
+	}
+
+	public Rectangle getBounds() {
+		return new Rectangle((int) x, (int) y, (int) width, (int) height);
 	}
 
 	public Rectangle getBoundsBottom() {
