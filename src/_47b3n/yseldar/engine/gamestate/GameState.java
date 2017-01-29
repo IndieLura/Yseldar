@@ -1,4 +1,4 @@
-package _47b3n.projectgame.engine.gamestate;
+package _47b3n.yseldar.engine.gamestate;
 
 import java.awt.Graphics;
 

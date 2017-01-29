@@ -1,6 +1,6 @@
-package _47b3n.projectgame.engine.game;
+package _47b3n.yseldar.engine.game;
 
-import _47b3n.projectgame.engine.Game;
+import _47b3n.yseldar.engine.Game;
 
 public class Camera {
 	

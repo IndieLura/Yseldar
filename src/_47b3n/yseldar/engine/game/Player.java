@@ -1,18 +1,18 @@
-package _47b3n.projectgame.engine.game;
+package _47b3n.yseldar.engine.game;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
-import _47b3n.projectgame.engine.game.entity.Entity;
-import _47b3n.projectgame.engine.game.entity.EntityID;
-import _47b3n.projectgame.engine.game.entity.entities.LevelEnd;
-import _47b3n.projectgame.engine.game.entity.entities.StoneBlock;
-import _47b3n.projectgame.engine.game.entity.entities.Tree;
-import _47b3n.projectgame.engine.gamestate.gamestates.InGame;
-import _47b3n.projectgame.engine.gfx.ImageLoader;
-import _47b3n.projectgame.engine.gfx.SpriteSheet;
+import _47b3n.yseldar.engine.game.entity.Entity;
+import _47b3n.yseldar.engine.game.entity.EntityID;
+import _47b3n.yseldar.engine.game.entity.entities.LevelEnd;
+import _47b3n.yseldar.engine.game.entity.entities.StoneBlock;
+import _47b3n.yseldar.engine.game.entity.entities.Tree;
+import _47b3n.yseldar.engine.gamestate.gamestates.InGame;
+import _47b3n.yseldar.engine.gfx.ImageLoader;
+import _47b3n.yseldar.engine.gfx.SpriteSheet;
 
 public class Player {
 

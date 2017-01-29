@@ -1,4 +1,4 @@
-package _47b3n.projectgame.engine.game.entity;
+package _47b3n.yseldar.engine.game.entity;
 
 public enum EntityID {
 

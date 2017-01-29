@@ -1,7 +1,8 @@
-package _47b3n.projectgame.engine.gamestate.gamestates;
+package _47b3n.yseldar.engine.gamestate.gamestates;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -9,16 +10,16 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
-import _47b3n.projectgame.engine.Game;
-import _47b3n.projectgame.engine.game.Camera;
-import _47b3n.projectgame.engine.game.Player;
-import _47b3n.projectgame.engine.game.entity.Entity;
-import _47b3n.projectgame.engine.game.entity.EntityID;
-import _47b3n.projectgame.engine.game.entity.entities.LevelEnd;
-import _47b3n.projectgame.engine.game.entity.entities.StoneBlock;
-import _47b3n.projectgame.engine.game.entity.entities.Tree;
-import _47b3n.projectgame.engine.gamestate.GameState;
-import _47b3n.projectgame.engine.gfx.ImageLoader;
+import _47b3n.yseldar.engine.Game;
+import _47b3n.yseldar.engine.game.Camera;
+import _47b3n.yseldar.engine.game.Player;
+import _47b3n.yseldar.engine.game.entity.Entity;
+import _47b3n.yseldar.engine.game.entity.EntityID;
+import _47b3n.yseldar.engine.game.entity.entities.LevelEnd;
+import _47b3n.yseldar.engine.game.entity.entities.StoneBlock;
+import _47b3n.yseldar.engine.game.entity.entities.Tree;
+import _47b3n.yseldar.engine.gamestate.GameState;
+import _47b3n.yseldar.engine.gfx.ImageLoader;
 
 public class InGame extends GameState {
 
@@ -32,6 +33,8 @@ public class InGame extends GameState {
 	private int level = 1;
 
 	public LinkedList<Entity> entities = new LinkedList<Entity>();
+	
+	private GradientPaint gradient;
 
 	public InGame() {
 		BufferedImage level1 = ImageLoader.loadImage("/levels/level1.bmp");
@@ -39,6 +42,8 @@ public class InGame extends GameState {
 
 		fontHud = new Font("Verdana", Font.PLAIN, 12);
 		cam = new Camera(0, 0);
+		
+		gradient = new GradientPaint(0, 0, new Color(100, 200, 244), 0, Game.HEIGHT + 400, new Color(84, 167, 204));
 	}
 
 	@Override
@@ -56,7 +61,7 @@ public class InGame extends GameState {
 		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_GASP);
 
 		// START OF BACKGROUND
-		g.setColor(new Color(100, 200, 244));
+		g2d.setPaint(gradient);
 		g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
 		// END OF BACKGROUND
 

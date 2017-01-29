@@ -1,4 +1,4 @@
-package _47b3n.projectgame.engine.gfx;
+package _47b3n.yseldar.engine.gfx;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;

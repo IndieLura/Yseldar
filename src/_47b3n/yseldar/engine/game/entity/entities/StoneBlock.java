@@ -1,24 +1,24 @@
-package _47b3n.projectgame.engine.game.entity.entities;
+package _47b3n.yseldar.engine.game.entity.entities;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import _47b3n.projectgame.engine.game.entity.Entity;
-import _47b3n.projectgame.engine.game.entity.EntityID;
-import _47b3n.projectgame.engine.gamestate.gamestates.InGame;
-import _47b3n.projectgame.engine.gfx.ImageLoader;
-import _47b3n.projectgame.engine.gfx.SpriteSheet;
+import _47b3n.yseldar.engine.game.entity.Entity;
+import _47b3n.yseldar.engine.game.entity.EntityID;
+import _47b3n.yseldar.engine.gamestate.gamestates.InGame;
+import _47b3n.yseldar.engine.gfx.ImageLoader;
+import _47b3n.yseldar.engine.gfx.SpriteSheet;
 
-public class Tree extends Entity {
+public class StoneBlock extends Entity {
 
 	private float width = 32, height = 32;
 	private BufferedImage texture;
 	
-	public Tree(float x, float y, EntityID id, InGame inGame) {
+	public StoneBlock(float x, float y, EntityID id, InGame inGame) {
 		super(x, y, id, inGame);
 		
-		texture = SpriteSheet.grabImage(ImageLoader.loadImage("/gfx/sheet.png"), 16, 1, 32, 32);
+		texture = SpriteSheet.grabImage(ImageLoader.loadImage("/gfx/sheet.png"), 1, 1, 32, 32);
 	}
 
 	@Override

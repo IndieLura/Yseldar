@@ -1,11 +1,11 @@
-package _47b3n.projectgame.engine;
+package _47b3n.yseldar.engine;
 
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
-import _47b3n.projectgame.engine.input.KeyInput;
-import _47b3n.projectgame.engine.input.MouseInput;
+import _47b3n.yseldar.engine.input.KeyInput;
+import _47b3n.yseldar.engine.input.MouseInput;
 
 public class Game extends Canvas implements Runnable {
 

@@ -1,4 +1,4 @@
-package _47b3n.projectgame.engine;
+package _47b3n.yseldar.engine;
 
 import java.awt.Dimension;
 
