@@ -1,11 +1,11 @@
-package _47b3n.projectgame.engine.game.object.objects;
+package _47b3n.projectgame.engine.game.entity.entities;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-import _47b3n.projectgame.engine.game.object.Entity;
-import _47b3n.projectgame.engine.game.object.EntityID;
+import _47b3n.projectgame.engine.game.entity.Entity;
+import _47b3n.projectgame.engine.game.entity.EntityID;
 import _47b3n.projectgame.engine.gamestate.gamestates.InGame;
 
 public class LevelEnd extends Entity {

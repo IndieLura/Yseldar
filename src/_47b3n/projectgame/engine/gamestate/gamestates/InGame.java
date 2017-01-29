@@ -12,11 +12,11 @@ import java.util.LinkedList;
 import _47b3n.projectgame.engine.Game;
 import _47b3n.projectgame.engine.game.Camera;
 import _47b3n.projectgame.engine.game.Player;
-import _47b3n.projectgame.engine.game.object.Entity;
-import _47b3n.projectgame.engine.game.object.EntityID;
-import _47b3n.projectgame.engine.game.object.objects.LevelEnd;
-import _47b3n.projectgame.engine.game.object.objects.StoneBlock;
-import _47b3n.projectgame.engine.game.object.objects.Tree;
+import _47b3n.projectgame.engine.game.entity.Entity;
+import _47b3n.projectgame.engine.game.entity.EntityID;
+import _47b3n.projectgame.engine.game.entity.entities.LevelEnd;
+import _47b3n.projectgame.engine.game.entity.entities.StoneBlock;
+import _47b3n.projectgame.engine.game.entity.entities.Tree;
 import _47b3n.projectgame.engine.gamestate.GameState;
 import _47b3n.projectgame.engine.gfx.ImageLoader;
 

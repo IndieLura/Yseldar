@@ -1,4 +1,4 @@
-package _47b3n.projectgame.engine.game.object;
+package _47b3n.projectgame.engine.game.entity;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;

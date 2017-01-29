@@ -5,11 +5,11 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
-import _47b3n.projectgame.engine.game.object.Entity;
-import _47b3n.projectgame.engine.game.object.EntityID;
-import _47b3n.projectgame.engine.game.object.objects.LevelEnd;
-import _47b3n.projectgame.engine.game.object.objects.StoneBlock;
-import _47b3n.projectgame.engine.game.object.objects.Tree;
+import _47b3n.projectgame.engine.game.entity.Entity;
+import _47b3n.projectgame.engine.game.entity.EntityID;
+import _47b3n.projectgame.engine.game.entity.entities.LevelEnd;
+import _47b3n.projectgame.engine.game.entity.entities.StoneBlock;
+import _47b3n.projectgame.engine.game.entity.entities.Tree;
 import _47b3n.projectgame.engine.gamestate.gamestates.InGame;
 import _47b3n.projectgame.engine.gfx.ImageLoader;
 import _47b3n.projectgame.engine.gfx.SpriteSheet;
@@ -19,11 +19,10 @@ public class Player {
 	private float x, y;
 	private float velX, velY;
 	private float width = 32, height = 32;
-	private float speed = 16;
+	private float speed = 4;
 
 	private BufferedImage texture;
 
-	@SuppressWarnings("unused")
 	private InGame inGame;
 	private LinkedList<Entity> entities;
 

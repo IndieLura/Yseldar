@@ -1,24 +1,24 @@
-package _47b3n.projectgame.engine.game.object.objects;
+package _47b3n.projectgame.engine.game.entity.entities;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import _47b3n.projectgame.engine.game.object.Entity;
-import _47b3n.projectgame.engine.game.object.EntityID;
+import _47b3n.projectgame.engine.game.entity.Entity;
+import _47b3n.projectgame.engine.game.entity.EntityID;
 import _47b3n.projectgame.engine.gamestate.gamestates.InGame;
 import _47b3n.projectgame.engine.gfx.ImageLoader;
 import _47b3n.projectgame.engine.gfx.SpriteSheet;
 
-public class StoneBlock extends Entity {
+public class Tree extends Entity {
 
-	private int width = 32, height = 32;
+	private float width = 32, height = 32;
 	private BufferedImage texture;
 	
-	public StoneBlock(float x, float y, EntityID id, InGame inGame) {
+	public Tree(float x, float y, EntityID id, InGame inGame) {
 		super(x, y, id, inGame);
 		
-		texture = SpriteSheet.grabImage(ImageLoader.loadImage("/gfx/sheet.png"), 1, 1, 32, 32);
+		texture = SpriteSheet.grabImage(ImageLoader.loadImage("/gfx/sheet.png"), 16, 1, 32, 32);
 	}
 
 	@Override
