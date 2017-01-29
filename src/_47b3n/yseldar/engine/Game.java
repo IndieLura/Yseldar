@@ -11,7 +11,7 @@ public class Game extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = -1650647469312364898L;
 	
-	private String title = getClass().getName();
+	private String title = "YSELDAR";
 	
 	public static int WIDTH, HEIGHT;
 	
@@ -88,10 +88,6 @@ public class Game extends Canvas implements Runnable {
 		bs.show();
 	}
 
-	public static void main(String[] args) {
-		new Game();
-	}
-
 	public void start() {
 		if (running)
 			return;
@@ -100,4 +96,7 @@ public class Game extends Canvas implements Runnable {
 		thread.start();
 	}
 
+	public static void main(String[] args) {
+		new Game();
+	}
 }
