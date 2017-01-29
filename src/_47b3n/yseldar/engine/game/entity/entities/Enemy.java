@@ -36,9 +36,7 @@ public class Enemy extends Entity {
 	public void tick() {
 		x += velX;
 		y += velY;
-
-		player = inGame.getPlayer();
-
+		
 		collision();
 		followPlayer();
 	}
@@ -99,6 +97,9 @@ public class Enemy extends Entity {
 		}
 	}
 
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
 
 	@Override
 	public Rectangle getBounds() {

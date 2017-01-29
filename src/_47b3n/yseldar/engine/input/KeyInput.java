@@ -39,10 +39,6 @@ public class KeyInput implements KeyListener {
 				}
 			}
 			// END OF CONTROLS OF PLAYER
-
-			if (key == KeyEvent.VK_H) {
-				handler.getInGame().showHud(true);
-			}
 		}
 	}
 
@@ -72,7 +68,11 @@ public class KeyInput implements KeyListener {
 			// END OF CONTROLS OF PLAYER
 
 			if (key == KeyEvent.VK_H) {
-				handler.getInGame().showHud(false);
+				if (handler.getInGame().showsHud() == true) {
+					handler.getInGame().showHud(false);
+				} else if (handler.getInGame().showsHud() == false) {
+					handler.getInGame().showHud(true);
+				}
 			}
 		}
 

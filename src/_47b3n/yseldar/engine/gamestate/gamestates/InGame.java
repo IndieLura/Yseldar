@@ -27,7 +27,7 @@ public class InGame extends GameState {
 	private Player player;
 
 	private Font fontHud;
-	private boolean showHud = false;
+	private boolean showHud = true;
 
 	private Camera cam;
 
@@ -56,8 +56,11 @@ public class InGame extends GameState {
 			entities.get(i).tick();
 		}
 
-		if (health >= 0)
-			health -= 0.5;
+		if (health <= 0)
+			System.exit(1);
+		
+		if (health < 0)
+			health = 0;
 	}
 
 	@Override
@@ -86,11 +89,15 @@ public class InGame extends GameState {
 			g.setFont(fontHud);
 			g.drawString("SCORE: ", 10, 20);
 			g.drawString("LEVEL: " + level, 10, 33);
-			g.drawString("HEALTH: ", 10, Game.HEIGHT - 78);
+			
+			// HEALTH BAR
+			g.drawString("HEALTH: ", 10, Game.HEIGHT - 10);
+			
 			g.setColor(Color.GREEN);
-			g.fillRect(75, Game.HEIGHT - 89, (int) health, 12);
+			g.fillRect(70, Game.HEIGHT - 21, (int) health, 12);
+			
 			g.setColor(Color.BLACK);
-			g.drawRect(75, Game.HEIGHT - 89, 100, 12);
+			g.drawRect(70, Game.HEIGHT - 21, 100, 12);
 		}
 		// END OF HUD
 	}
@@ -117,6 +124,12 @@ public class InGame extends GameState {
 					addEntity(new LevelEnd(xx * 32, yy * 32, EntityID.LevelEnd, this));
 				if (red == 123 && green == 123 && blue == 123)
 					addEntity(new Enemy(xx * 32, yy * 32, EntityID.Enemy, this));
+			}
+		}
+		
+		for (int i = 0; i < entities.size(); i++) {
+			if (entities.get(i).getID() == EntityID.Enemy) {
+				((Enemy) entities.get(i)).setPlayer(player);
 			}
 		}
 
@@ -154,6 +167,10 @@ public class InGame extends GameState {
 		return showHud;
 	}
 
+	public void changeHealth(float number) {
+		health += number;
+	}
+	
 	public Player getPlayer() {
 		return player;
 	}

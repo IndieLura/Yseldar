@@ -42,6 +42,9 @@ public class Player {
 	}
 
 	private void collision() {
+		if (entities.isEmpty() || entities.size() <= 0) {
+			return;
+		}
 		for (int i = 0; i < entities.size(); i++) {
 
 			if (entities.get(i).getID() != EntityID.Enemy) {
@@ -73,6 +76,14 @@ public class Player {
 				if (getBoundsRight().intersects(entity.getBounds())) {
 					x = entity.getX() - entity.getWidth();
 					velX = 0;
+				}
+			}
+
+			if (entities.get(i).getID() == EntityID.Enemy) {
+				if (getBounds().intersects(entities.get(i).getBounds())) {
+					inGame.changeHealth(-0.2F);
+				} else {
+					inGame.changeHealth(0);
 				}
 			}
 
