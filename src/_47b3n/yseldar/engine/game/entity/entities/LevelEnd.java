@@ -1,20 +1,26 @@
 package _47b3n.yseldar.engine.game.entity.entities;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 import _47b3n.yseldar.engine.game.entity.Entity;
 import _47b3n.yseldar.engine.game.entity.EntityID;
 import _47b3n.yseldar.engine.gamestate.gamestates.InGame;
+import _47b3n.yseldar.engine.gfx.ImageLoader;
+import _47b3n.yseldar.engine.gfx.SpriteSheet;
 
 public class LevelEnd extends Entity {
 
+	private BufferedImage texture;
+	
 	public LevelEnd(float x, float y, EntityID id, InGame inGame) {
 		super(x, y, id, inGame);
 
 		width = 32;
 		height = 32;
+		
+		texture = SpriteSheet.grabImage(ImageLoader.loadImage("/gfx/sheet.png"), 9, 2, (int) width, (int) height);
 	}
 
 	@Override
@@ -24,8 +30,7 @@ public class LevelEnd extends Entity {
 
 	@Override
 	public void render(Graphics g) {
-		g.setColor(Color.MAGENTA);
-		g.fillRect((int) x, (int) y, (int) width, (int) height);
+		g.drawImage(texture, (int) x, (int) y, null);
 	}
 
 	@Override

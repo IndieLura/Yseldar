@@ -1,29 +1,34 @@
 package _47b3n.yseldar.engine.game.entity.entities;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
 import _47b3n.yseldar.engine.game.Player;
 import _47b3n.yseldar.engine.game.entity.Entity;
 import _47b3n.yseldar.engine.game.entity.EntityID;
 import _47b3n.yseldar.engine.gamestate.gamestates.InGame;
+import _47b3n.yseldar.engine.gfx.ImageLoader;
+import _47b3n.yseldar.engine.gfx.SpriteSheet;
 
 public class Enemy extends Entity {
 
 	private float speed = 1;
 
 	private Player player;
-	public LinkedList<Entity> entities;
+	private LinkedList<Entity> entities;
 
+	private BufferedImage texture;
+	
 	public Enemy(float x, float y, EntityID id, InGame inGame) {
 		super(x, y, id, inGame);
 
 		width = 32;
 		height = 32;
 
+		texture = SpriteSheet.grabImage(ImageLoader.loadImage("/gfx/sheet.png"), 9, 1, (int) width, (int) height);
+		
 		entities = inGame.getEntities();
 	}
 
@@ -34,10 +39,16 @@ public class Enemy extends Entity {
 
 		player = inGame.getPlayer();
 
-		logic();
+		collision();
+		followPlayer();
 	}
 
-	private void logic() {
+	@Override
+	public void render(Graphics g) {
+		g.drawImage(texture, (int) x, (int) y, null);
+	}
+	
+	private void collision() {
 		for (int i = 0; i < entities.size(); i++) {
 			Entity entity = entities.get(i);
 			if (getBoundsTop().intersects(entity.getBounds())) {
@@ -60,7 +71,9 @@ public class Enemy extends Entity {
 				setVelX(0);
 			}
 		}
-
+	}
+	
+	private void followPlayer() {
 		if (playerNearby()) {
 			if (x < player.getX()) {
 				setVelX(speed);
@@ -86,14 +99,6 @@ public class Enemy extends Entity {
 		}
 	}
 
-	@Override
-	public void render(Graphics g) {
-		g.setColor(Color.RED);
-		g.fillRect((int) x, (int) y, (int) width, (int) height);
-
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.draw(getRadius());
-	}
 
 	@Override
 	public Rectangle getBounds() {
@@ -118,12 +123,12 @@ public class Enemy extends Entity {
 		return new Rectangle((int) x, (int) y + 5, (int) 5, (int) height - 10);
 	}
 
-	private boolean playerNearby() {
-		return getRadius().intersects(player.getBounds());
-	}
-
 	private Rectangle getRadius() {
 		return new Rectangle((int) x + ((int) width / 2) - 300, (int) y + ((int) height / 2) - 300, 600, 600);
+	}
+	
+	private boolean playerNearby() {
+		return getRadius().intersects(player.getBounds());
 	}
 
 }
