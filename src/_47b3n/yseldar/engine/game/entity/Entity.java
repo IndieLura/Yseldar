@@ -85,7 +85,7 @@ public abstract class Entity {
 	public float getHeight() {
 		return height;
 	}
-	
+
 	public int getFacing() {
 		return facing;
 	}

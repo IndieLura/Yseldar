@@ -10,21 +10,21 @@ public class KeyInput implements KeyListener {
 
 	private Handler handler;
 	private Player player;
-	
+
 	public KeyInput(Handler handler) {
 		this.handler = handler;
 	}
-	
+
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
-		
+
 		if (handler.getGameState() == handler.getInGame()) {
-			
-			//CONTROLS OF PLAYER
+
+			// CONTROLS OF PLAYER
 			if (handler.getInGame().getPlayer() != null) {
 				player = handler.getInGame().getPlayer();
-				
+
 				if (key == KeyEvent.VK_W) {
 					player.setVelY(-player.getSpeed());
 				}
@@ -38,24 +38,24 @@ public class KeyInput implements KeyListener {
 					player.setVelX(player.getSpeed());
 				}
 			}
-			//END OF CONTROLS OF PLAYER
-			
+			// END OF CONTROLS OF PLAYER
+
 			if (key == KeyEvent.VK_H) {
 				handler.getInGame().showHud(true);
 			}
-		}	
+		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
-		
+
 		if (handler.getGameState() == handler.getInGame()) {
-			
-			//CONTROLS OF PLAYER
+
+			// CONTROLS OF PLAYER
 			if (handler.getInGame().getPlayer() != null) {
 				player = handler.getInGame().getPlayer();
-				
+
 				if (key == KeyEvent.VK_W) {
 					player.setVelY(0);
 				}
@@ -69,18 +69,19 @@ public class KeyInput implements KeyListener {
 					player.setVelX(0);
 				}
 			}
-			//END OF CONTROLS OF PLAYER
-			
+			// END OF CONTROLS OF PLAYER
+
 			if (key == KeyEvent.VK_H) {
 				handler.getInGame().showHud(false);
 			}
 		}
-			
+
 		if (key == KeyEvent.VK_ESCAPE) {
 			System.exit(1);
 		}
 	}
 
 	@Override
-	public void keyTyped(KeyEvent e) {}
+	public void keyTyped(KeyEvent e) {
+	}
 }

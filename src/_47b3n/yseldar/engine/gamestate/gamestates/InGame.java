@@ -31,11 +31,11 @@ public class InGame extends GameState {
 
 	private Camera cam;
 
-	private int level = 1; 
+	private int level = 1;
 	private float health = 100;
 
 	private LinkedList<Entity> entities = new LinkedList<Entity>();
-	
+
 	private GradientPaint gradient;
 
 	public InGame() {
@@ -44,7 +44,7 @@ public class InGame extends GameState {
 
 		fontHud = new Font("Verdana", Font.PLAIN, 12);
 		cam = new Camera(0, 0);
-		
+
 		gradient = new GradientPaint(0, 0, new Color(100, 200, 244), 0, Game.HEIGHT + 400, new Color(84, 167, 204));
 	}
 
@@ -55,7 +55,7 @@ public class InGame extends GameState {
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).tick();
 		}
-		
+
 		if (health >= 0)
 			health -= 0.5;
 	}
@@ -137,7 +137,7 @@ public class InGame extends GameState {
 	public LinkedList<Entity> getEntities() {
 		return entities;
 	}
-	
+
 	public void addEntity(Entity entity) {
 		entities.add(entity);
 	}

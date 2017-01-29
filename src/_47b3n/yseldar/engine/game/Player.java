@@ -37,24 +37,24 @@ public class Player {
 	public void tick() {
 		x += velX;
 		y += velY;
-		
+
 		collision();
 	}
-	
+
 	private void collision() {
 		for (int i = 0; i < entities.size(); i++) {
 
 			if (entities.get(i).getID() != EntityID.Enemy) {
 				Entity entity = entities.get(i);
-				
+
 				if (entity.getID() == EntityID.LevelEnd) {
 					LevelEnd end = (LevelEnd) entity;
-					
+
 					if (getBounds().intersects(end.getBounds())) {
 						inGame.levelUp();
 					}
 				}
-				
+
 				if (getBoundsTop().intersects(entity.getBounds())) {
 					y = entity.getY() + entity.getHeight();
 					velY = 0;

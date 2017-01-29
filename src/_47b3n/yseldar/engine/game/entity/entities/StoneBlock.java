@@ -13,19 +13,19 @@ import _47b3n.yseldar.engine.gfx.SpriteSheet;
 public class StoneBlock extends Entity {
 
 	private BufferedImage texture;
-	
+
 	public StoneBlock(float x, float y, EntityID id, InGame inGame) {
 		super(x, y, id, inGame);
-		
+
 		width = 32;
 		height = 32;
-		
+
 		texture = SpriteSheet.grabImage(ImageLoader.loadImage("/gfx/sheet.png"), 2, 1, 32, 32);
 	}
 
 	@Override
 	public void tick() {
-		
+
 	}
 
 	@Override
