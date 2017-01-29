@@ -10,14 +10,15 @@ import _47b3n.yseldar.engine.gamestate.gamestates.InGame;
 import _47b3n.yseldar.engine.gfx.ImageLoader;
 import _47b3n.yseldar.engine.gfx.SpriteSheet;
 
-
 public class Tree extends Entity {
 
-	private float width = 32, height = 32;
 	private BufferedImage texture;
 	
 	public Tree(float x, float y, EntityID id, InGame inGame) {
 		super(x, y, id, inGame);
+		
+		width = 32;
+		height = 32;
 		
 		texture = SpriteSheet.grabImage(ImageLoader.loadImage("/gfx/sheet.png"), 16, 1, 32, 32);
 	}

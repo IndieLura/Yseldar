@@ -8,8 +8,6 @@ import java.util.LinkedList;
 import _47b3n.yseldar.engine.game.entity.Entity;
 import _47b3n.yseldar.engine.game.entity.EntityID;
 import _47b3n.yseldar.engine.game.entity.entities.LevelEnd;
-import _47b3n.yseldar.engine.game.entity.entities.StoneBlock;
-import _47b3n.yseldar.engine.game.entity.entities.Tree;
 import _47b3n.yseldar.engine.gamestate.gamestates.InGame;
 import _47b3n.yseldar.engine.gfx.ImageLoader;
 import _47b3n.yseldar.engine.gfx.SpriteSheet;
@@ -31,7 +29,7 @@ public class Player {
 		this.y = y;
 		this.inGame = inGame;
 
-		entities = inGame.entities;
+		entities = inGame.getEntities();
 
 		texture = SpriteSheet.grabImage(ImageLoader.loadImage("/gfx/sheet.png"), 9, 8, 32, 32);
 	}
@@ -39,62 +37,45 @@ public class Player {
 	public void tick() {
 		x += velX;
 		y += velY;
-
+		
+		collision();
+	}
+	
+	private void collision() {
 		for (int i = 0; i < entities.size(); i++) {
 
-			if (entities.get(i).getID() == EntityID.StoneBlock) {
-				StoneBlock block = (StoneBlock) entities.get(i);
-				if (getBoundsTop().intersects(block.getBounds())) {
-					y = block.getY() + block.getHeight();
+			if (entities.get(i).getID() != EntityID.Enemy) {
+				Entity entity = entities.get(i);
+				
+				if (entity.getID() == EntityID.LevelEnd) {
+					LevelEnd end = (LevelEnd) entity;
+					
+					if (getBounds().intersects(end.getBounds())) {
+						inGame.levelUp();
+					}
+				}
+				
+				if (getBoundsTop().intersects(entity.getBounds())) {
+					y = entity.getY() + entity.getHeight();
 					velY = 0;
 				}
 
-				if (getBoundsBottom().intersects(block.getBounds())) {
-					y = block.getY() - block.getHeight();
+				if (getBoundsBottom().intersects(entity.getBounds())) {
+					y = entity.getY() - entity.getHeight();
 					velY = 0;
 				}
 
-				if (getBoundsLeft().intersects(block.getBounds())) {
-					x = block.getX() + block.getWidth();
+				if (getBoundsLeft().intersects(entity.getBounds())) {
+					x = entity.getX() + entity.getWidth();
 					velX = 0;
 				}
 
-				if (getBoundsRight().intersects(block.getBounds())) {
-					x = block.getX() - block.getWidth();
-					velX = 0;
-				}
-			}
-
-			if (entities.get(i).getID() == EntityID.Tree) {
-				Tree tree = (Tree) entities.get(i);
-				if (getBoundsTop().intersects(tree.getBounds())) {
-					y = tree.getY() + tree.getHeight();
-					velY = 0;
-				}
-
-				if (getBoundsBottom().intersects(tree.getBounds())) {
-					y = tree.getY() - tree.getHeight();
-					velY = 0;
-				}
-
-				if (getBoundsLeft().intersects(tree.getBounds())) {
-					x = tree.getX() + tree.getWidth();
-					velX = 0;
-				}
-
-				if (getBoundsRight().intersects(tree.getBounds())) {
-					x = tree.getX() - tree.getWidth();
+				if (getBoundsRight().intersects(entity.getBounds())) {
+					x = entity.getX() - entity.getWidth();
 					velX = 0;
 				}
 			}
 
-			if (entities.get(i).getID() == EntityID.LevelEnd) {
-				LevelEnd end = (LevelEnd) entities.get(i);
-
-				if (getBounds().intersects(end.getBounds())) {
-					inGame.levelUp();
-				}
-			}
 		}
 	}
 

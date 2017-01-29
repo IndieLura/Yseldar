@@ -9,11 +9,12 @@ import _47b3n.yseldar.engine.game.entity.EntityID;
 import _47b3n.yseldar.engine.gamestate.gamestates.InGame;
 
 public class LevelEnd extends Entity {
-
-	private float width = 32, height = 32;
 	
 	public LevelEnd(float x, float y, EntityID id, InGame inGame) {
 		super(x, y, id, inGame);
+		
+		width = 32;
+		height = 32;
 	}
 
 	@Override

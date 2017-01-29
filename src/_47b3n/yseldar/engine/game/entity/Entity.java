@@ -8,6 +8,7 @@ import _47b3n.yseldar.engine.gamestate.gamestates.InGame;
 public abstract class Entity {
 	protected float velX = 0.0F;
 	protected float velY = 0.0F;
+	protected float width, height;
 	protected boolean falling = true;
 	protected boolean jumping = false;
 	protected int facing = 1;
@@ -77,6 +78,14 @@ public abstract class Entity {
 		this.velY = velY;
 	}
 
+	public float getWidth() {
+		return width;
+	}
+
+	public float getHeight() {
+		return height;
+	}
+	
 	public int getFacing() {
 		return facing;
 	}

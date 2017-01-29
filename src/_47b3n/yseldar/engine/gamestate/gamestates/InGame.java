@@ -15,6 +15,7 @@ import _47b3n.yseldar.engine.game.Camera;
 import _47b3n.yseldar.engine.game.Player;
 import _47b3n.yseldar.engine.game.entity.Entity;
 import _47b3n.yseldar.engine.game.entity.EntityID;
+import _47b3n.yseldar.engine.game.entity.entities.Enemy;
 import _47b3n.yseldar.engine.game.entity.entities.LevelEnd;
 import _47b3n.yseldar.engine.game.entity.entities.StoneBlock;
 import _47b3n.yseldar.engine.game.entity.entities.Tree;
@@ -30,9 +31,10 @@ public class InGame extends GameState {
 
 	private Camera cam;
 
-	private int level = 1;
+	private int level = 1; 
+	private float health = 100;
 
-	public LinkedList<Entity> entities = new LinkedList<Entity>();
+	private LinkedList<Entity> entities = new LinkedList<Entity>();
 	
 	private GradientPaint gradient;
 
@@ -53,6 +55,9 @@ public class InGame extends GameState {
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).tick();
 		}
+		
+		if (health >= 0)
+			health -= 0.5;
 	}
 
 	@Override
@@ -80,6 +85,12 @@ public class InGame extends GameState {
 			g.setColor(Color.BLACK);
 			g.setFont(fontHud);
 			g.drawString("SCORE: ", 10, 20);
+			g.drawString("LEVEL: " + level, 10, 33);
+			g.drawString("HEALTH: ", 10, Game.HEIGHT - 78);
+			g.setColor(Color.GREEN);
+			g.fillRect(75, Game.HEIGHT - 89, (int) health, 12);
+			g.setColor(Color.BLACK);
+			g.drawRect(75, Game.HEIGHT - 89, 100, 12);
 		}
 		// END OF HUD
 	}
@@ -104,6 +115,8 @@ public class InGame extends GameState {
 					addEntity(new Tree(xx * 32, yy * 32, EntityID.Tree, this));
 				if (red == 255 && green == 0 && blue == 255)
 					addEntity(new LevelEnd(xx * 32, yy * 32, EntityID.LevelEnd, this));
+				if (red == 123 && green == 123 && blue == 123)
+					addEntity(new Enemy(xx * 32, yy * 32, EntityID.Enemy, this));
 			}
 		}
 
@@ -121,6 +134,10 @@ public class InGame extends GameState {
 		}
 	}
 
+	public LinkedList<Entity> getEntities() {
+		return entities;
+	}
+	
 	public void addEntity(Entity entity) {
 		entities.add(entity);
 	}

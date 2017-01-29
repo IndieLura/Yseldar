@@ -12,13 +12,15 @@ import _47b3n.yseldar.engine.gfx.SpriteSheet;
 
 public class StoneBlock extends Entity {
 
-	private float width = 32, height = 32;
 	private BufferedImage texture;
 	
 	public StoneBlock(float x, float y, EntityID id, InGame inGame) {
 		super(x, y, id, inGame);
 		
-		texture = SpriteSheet.grabImage(ImageLoader.loadImage("/gfx/sheet.png"), 1, 1, 32, 32);
+		width = 32;
+		height = 32;
+		
+		texture = SpriteSheet.grabImage(ImageLoader.loadImage("/gfx/sheet.png"), 2, 1, 32, 32);
 	}
 
 	@Override
