@@ -17,11 +17,7 @@ public class Player {
 	private float x, y;
 	private float velX, velY;
 	private float width = 32, height = 32;
-<<<<<<< HEAD:src/_47b3n/projectgame/engine/game/Player.java
-	private float speed = 2;
-=======
 	private float speed = 4;
->>>>>>> e99294df5adae7fa6f8dc926b47474e1193681f2:src/_47b3n/yseldar/engine/game/Player.java
 
 	private BufferedImage texture;
 
