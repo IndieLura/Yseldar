@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import _47b3n.projectgame.engine.Game;
 import _47b3n.projectgame.engine.game.Camera;
 import _47b3n.projectgame.engine.game.Player;
+import _47b3n.projectgame.engine.game.TextBubble;
 import _47b3n.projectgame.engine.game.object.Entity;
 import _47b3n.projectgame.engine.game.object.EntityID;
 import _47b3n.projectgame.engine.game.object.objects.LevelEnd;
@@ -33,12 +34,17 @@ public class InGame extends GameState {
 	private int maxLevel = 2;
 
 	public LinkedList<Entity> entities = new LinkedList<Entity>();
+	
+	private TextBubble textBubble;
 
 	public InGame() {
 		BufferedImage level1 = ImageLoader.loadImage("/levels/level1.bmp");
 		loadLevel(level1);
 		System.out.println("/levels/level" + level + ".bmp");
-
+		
+		textBubble = new TextBubble();
+		textBubble.toggleTextBubble(true, "Your'e Polly Poempkin, you come from the USA.\nIn the 60s you fought in the Vietnam war.");
+		
 		fontHud = new Font("Verdana", Font.PLAIN, 12);
 		cam = new Camera(0, 0);
 	}
@@ -50,6 +56,7 @@ public class InGame extends GameState {
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).tick();
 		}
+		textBubble.tick();
 	}
 
 	@Override
@@ -62,6 +69,7 @@ public class InGame extends GameState {
 		g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
 		// END OF BACKGROUND
 
+		//DRAW FROM HERE
 		g2d.translate((int) cam.getX(), (int) cam.getY());
 
 		for (int i = 0; i < entities.size(); i++) {
@@ -70,6 +78,10 @@ public class InGame extends GameState {
 		player.render(g);
 
 		g2d.translate((int) -cam.getX(), (int) -cam.getY());
+		
+		if (textBubble.getShow()) {
+			textBubble.render(g);
+		}
 		// TO HERE
 
 		// START OF HUD
@@ -115,6 +127,8 @@ public class InGame extends GameState {
 			BufferedImage levelImg = ImageLoader.loadImage("/levels/level" + level + ".bmp");
 			System.out.println("/levels/level" + level + ".bmp");
 			loadLevel(levelImg);
+		} else {
+			System.out.println("Finish");
 		}
 	}
 

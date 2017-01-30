@@ -1,6 +1,5 @@
 package _47b3n.projectgame.engine.game.object.objects;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
