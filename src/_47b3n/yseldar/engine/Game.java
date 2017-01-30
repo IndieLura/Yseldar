@@ -1,25 +1,25 @@
-package _47b3n.projectgame.engine;
+package _47b3n.yseldar.engine;
 
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
-import _47b3n.projectgame.engine.input.KeyInput;
-import _47b3n.projectgame.engine.input.MouseInput;
+import _47b3n.yseldar.engine.input.KeyInput;
+import _47b3n.yseldar.engine.input.MouseInput;
 
 public class Game extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = -1650647469312364898L;
-	
-	private String title = getClass().getName();
-	
+
+	private String title = "YSELDAR";
+
 	public static int WIDTH, HEIGHT;
-	
+
 	private Thread thread;
 	private boolean running = false;
-	
+
 	private Handler handler;
-	
+
 	public Game() {
 		new Window(title, 800, 600, this);
 	}
@@ -27,18 +27,18 @@ public class Game extends Canvas implements Runnable {
 	private void init() {
 		WIDTH = getWidth();
 		HEIGHT = getHeight();
-		
+
 		handler = new Handler();
-		
+
 		addKeyListener(new KeyInput(handler));
 		addMouseListener(new MouseInput(handler));
 	}
-	
+
 	@Override
 	public void run() {
 		this.requestFocus();
 		init();
-		
+
 		long lastTime = System.nanoTime();
 		long timer = System.currentTimeMillis();
 		final double ns = 1000000000.0 / 120.0;
@@ -72,7 +72,7 @@ public class Game extends Canvas implements Runnable {
 	private void tick() {
 		handler.tick();
 	}
-	
+
 	private void render() {
 		BufferStrategy bs = getBufferStrategy();
 		if (bs == null) {
@@ -80,16 +80,12 @@ public class Game extends Canvas implements Runnable {
 			return;
 		}
 		Graphics g = bs.getDrawGraphics();
-		//Graphics2D g2d = (Graphics2D) g;
+		// Graphics2D g2d = (Graphics2D) g;
 
 		handler.render(g);
 
 		g.dispose();
 		bs.show();
-	}
-
-	public static void main(String[] args) {
-		new Game();
 	}
 
 	public void start() {
@@ -100,4 +96,7 @@ public class Game extends Canvas implements Runnable {
 		thread.start();
 	}
 
+	public static void main(String[] args) {
+		new Game();
+	}
 }

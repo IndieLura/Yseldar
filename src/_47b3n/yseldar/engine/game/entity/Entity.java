@@ -1,13 +1,14 @@
-package _47b3n.projectgame.engine.game.object;
+package _47b3n.yseldar.engine.game.entity;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-import _47b3n.projectgame.engine.gamestate.gamestates.InGame;
+import _47b3n.yseldar.engine.gamestate.gamestates.InGame;
 
 public abstract class Entity {
 	protected float velX = 0.0F;
 	protected float velY = 0.0F;
+	protected float width, height;
 	protected boolean falling = true;
 	protected boolean jumping = false;
 	protected int facing = 1;
@@ -75,6 +76,14 @@ public abstract class Entity {
 
 	public void setVelY(float velY) {
 		this.velY = velY;
+	}
+
+	public float getWidth() {
+		return width;
+	}
+
+	public float getHeight() {
+		return height;
 	}
 
 	public int getFacing() {

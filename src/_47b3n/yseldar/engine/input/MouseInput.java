@@ -1,9 +1,9 @@
-package _47b3n.projectgame.engine.input;
+package _47b3n.yseldar.engine.input;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import _47b3n.projectgame.engine.Handler;
+import _47b3n.yseldar.engine.Handler;
 
 public class MouseInput implements MouseListener {
 

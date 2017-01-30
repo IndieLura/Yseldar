@@ -1,4 +1,4 @@
-package _47b3n.projectgame.engine;
+package _47b3n.yseldar.engine;
 
 import java.awt.Dimension;
 
@@ -18,8 +18,8 @@ public class Window {
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
-		
+
 		game.start();
 	}
-
+	
 }

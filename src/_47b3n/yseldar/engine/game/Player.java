@@ -1,29 +1,30 @@
-package _47b3n.projectgame.engine.game;
+package _47b3n.yseldar.engine.game;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
-import _47b3n.projectgame.engine.game.object.Entity;
-import _47b3n.projectgame.engine.game.object.EntityID;
-import _47b3n.projectgame.engine.game.object.objects.LevelEnd;
-import _47b3n.projectgame.engine.game.object.objects.StoneBlock;
-import _47b3n.projectgame.engine.game.object.objects.Tree;
-import _47b3n.projectgame.engine.gamestate.gamestates.InGame;
-import _47b3n.projectgame.engine.gfx.ImageLoader;
-import _47b3n.projectgame.engine.gfx.SpriteSheet;
+import _47b3n.yseldar.engine.game.entity.Entity;
+import _47b3n.yseldar.engine.game.entity.EntityID;
+import _47b3n.yseldar.engine.game.entity.entities.LevelEnd;
+import _47b3n.yseldar.engine.gamestate.gamestates.InGame;
+import _47b3n.yseldar.engine.gfx.ImageLoader;
+import _47b3n.yseldar.engine.gfx.SpriteSheet;
 
 public class Player {
 
 	private float x, y;
 	private float velX, velY;
 	private float width = 32, height = 32;
+<<<<<<< HEAD:src/_47b3n/projectgame/engine/game/Player.java
 	private float speed = 2;
+=======
+	private float speed = 4;
+>>>>>>> e99294df5adae7fa6f8dc926b47474e1193681f2:src/_47b3n/yseldar/engine/game/Player.java
 
 	private BufferedImage texture;
 
-	@SuppressWarnings("unused")
 	private InGame inGame;
 	private LinkedList<Entity> entities;
 
@@ -32,7 +33,7 @@ public class Player {
 		this.y = y;
 		this.inGame = inGame;
 
-		entities = inGame.entities;
+		entities = inGame.getEntities();
 
 		texture = SpriteSheet.grabImage(ImageLoader.loadImage("/gfx/sheet.png"), 9, 8, 32, 32);
 	}
@@ -41,61 +42,55 @@ public class Player {
 		x += velX;
 		y += velY;
 
+		collision();
+	}
+
+	private void collision() {
+		if (entities.isEmpty() || entities.size() <= 0) {
+			return;
+		}
 		for (int i = 0; i < entities.size(); i++) {
 
-			if (entities.get(i).getID() == EntityID.StoneBlock) {
-				StoneBlock block = (StoneBlock) entities.get(i);
-				if (getBoundsTop().intersects(block.getBounds())) {
-					y = block.getY() + block.getHeight();
+			if (entities.get(i).getID() != EntityID.Enemy) {
+				Entity entity = entities.get(i);
+
+				if (entity.getID() == EntityID.LevelEnd) {
+					LevelEnd end = (LevelEnd) entity;
+
+					if (getBounds().intersects(end.getBounds())) {
+						inGame.levelUp();
+					}
+				}
+
+				if (getBoundsTop().intersects(entity.getBounds())) {
+					y = entity.getY() + entity.getHeight();
 					velY = 0;
 				}
 
-				if (getBoundsBottom().intersects(block.getBounds())) {
-					y = block.getY() - block.getHeight();
+				if (getBoundsBottom().intersects(entity.getBounds())) {
+					y = entity.getY() - entity.getHeight();
 					velY = 0;
 				}
 
-				if (getBoundsLeft().intersects(block.getBounds())) {
-					x = block.getX() + block.getWidth();
+				if (getBoundsLeft().intersects(entity.getBounds())) {
+					x = entity.getX() + entity.getWidth();
 					velX = 0;
 				}
 
-				if (getBoundsRight().intersects(block.getBounds())) {
-					x = block.getX() - block.getWidth();
-					velX = 0;
-				}
-			}
-
-			if (entities.get(i).getID() == EntityID.Tree) {
-				Tree tree = (Tree) entities.get(i);
-				if (getBoundsTop().intersects(tree.getBounds())) {
-					y = tree.getY() + tree.getHeight();
-					velY = 0;
-				}
-
-				if (getBoundsBottom().intersects(tree.getBounds())) {
-					y = tree.getY() - tree.getHeight();
-					velY = 0;
-				}
-
-				if (getBoundsLeft().intersects(tree.getBounds())) {
-					x = tree.getX() + tree.getWidth();
-					velX = 0;
-				}
-
-				if (getBoundsRight().intersects(tree.getBounds())) {
-					x = tree.getX() - tree.getWidth();
+				if (getBoundsRight().intersects(entity.getBounds())) {
+					x = entity.getX() - entity.getWidth();
 					velX = 0;
 				}
 			}
 
-			if (entities.get(i).getID() == EntityID.LevelEnd) {
-				LevelEnd end = (LevelEnd) entities.get(i);
-
-				if (getBounds().intersects(end.getBounds())) {
-					inGame.levelUp();
+			if (entities.get(i).getID() == EntityID.Enemy) {
+				if (getBounds().intersects(entities.get(i).getBounds())) {
+					inGame.changeHealth(-0.2F);
+				} else {
+					inGame.changeHealth(0);
 				}
 			}
+
 		}
 	}
 
