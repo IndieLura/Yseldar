@@ -21,5 +21,5 @@ public class Window {
 
 		game.start();
 	}
-	
+
 }
