@@ -64,6 +64,9 @@ public class KeyInput implements KeyListener {
 				if (key == KeyEvent.VK_D) {
 					player.setVelX(0);
 				}
+				if (key == KeyEvent.VK_SPACE) {
+					player.attack();
+				}
 			}
 			// END OF CONTROLS OF PLAYER
 

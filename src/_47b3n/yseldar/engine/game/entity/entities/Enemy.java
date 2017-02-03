@@ -1,5 +1,6 @@
 package _47b3n.yseldar.engine.game.entity.entities;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -16,12 +17,13 @@ public class Enemy extends Entity {
 
 	private float speed = 1;
 	private float health = 100;
-	
+	private int resize = 64;
+
 	private Player player;
 	private LinkedList<Entity> entities;
 
 	private BufferedImage texture;
-	
+
 	public Enemy(float x, float y, EntityID id, InGame inGame) {
 		super(x, y, id, inGame);
 
@@ -37,16 +39,14 @@ public class Enemy extends Entity {
 	public void tick() {
 		x += velX;
 		y += velY;
-		
+
+		if (health <= 0)
+			inGame.removeEntity(this);
+
 		collision();
 		followPlayer();
 	}
 
-	@Override
-	public void render(Graphics g) {
-		g.drawImage(texture, (int) x, (int) y, null);
-	}
-	
 	private void collision() {
 		for (int i = 0; i < entities.size(); i++) {
 			Entity entity = entities.get(i);
@@ -71,7 +71,7 @@ public class Enemy extends Entity {
 			}
 		}
 	}
-	
+
 	private void followPlayer() {
 		if (playerNearby()) {
 			if (x < player.getX()) {
@@ -98,10 +98,23 @@ public class Enemy extends Entity {
 		}
 	}
 
+	@Override
+	public void render(Graphics g) {
+		// HEALTH BAR
+		g.setColor(Color.GREEN);
+		g.fillRect((int) x + 7, (int) y - 15, (int) health / 2, 12);
+
+		g.setColor(Color.BLACK);
+		g.drawRect((int) x + 7, (int) y - 15, 50, 12); 
+		// END OF HEALTH BAR
+
+		g.drawImage(texture, (int) x, (int) y, resize, resize, null);
+	}
+
 	public void changeHealth(float health) {
 		this.health += health;
 	}
-	
+
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
@@ -132,7 +145,7 @@ public class Enemy extends Entity {
 	private Rectangle getRadius() {
 		return new Rectangle((int) x + ((int) width / 2) - 300, (int) y + ((int) height / 2) - 300, 600, 600);
 	}
-	
+
 	private boolean playerNearby() {
 		return getRadius().intersects(player.getBounds());
 	}

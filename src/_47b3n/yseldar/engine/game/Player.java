@@ -87,6 +87,7 @@ public class Player {
 					if (attack) {
 						Enemy enemy = (Enemy) entities.get(i);
 						enemy.changeHealth(-25F);
+						attack = false;
 					} else {
 						inGame.changeHealth(-0.2F);
 					}
