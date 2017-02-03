@@ -111,7 +111,6 @@ public class InGame extends GameState {
 	private void loadLevel(BufferedImage image) {
 		int w = image.getWidth();
 		int h = image.getHeight();
-
 		System.out.println(w + " " + h);
 
 		for (int xx = 0; xx < h; xx++) {

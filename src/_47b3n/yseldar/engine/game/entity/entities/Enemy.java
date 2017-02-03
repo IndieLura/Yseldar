@@ -15,7 +15,8 @@ import _47b3n.yseldar.engine.gfx.SpriteSheet;
 public class Enemy extends Entity {
 
 	private float speed = 1;
-
+	private float health = 100;
+	
 	private Player player;
 	private LinkedList<Entity> entities;
 
@@ -97,6 +98,10 @@ public class Enemy extends Entity {
 		}
 	}
 
+	public void changeHealth(float health) {
+		this.health += health;
+	}
+	
 	public void setPlayer(Player player) {
 		this.player = player;
 	}

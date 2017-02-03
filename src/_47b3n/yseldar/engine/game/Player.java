@@ -7,6 +7,7 @@ import java.util.LinkedList;
 
 import _47b3n.yseldar.engine.game.entity.Entity;
 import _47b3n.yseldar.engine.game.entity.EntityID;
+import _47b3n.yseldar.engine.game.entity.entities.Enemy;
 import _47b3n.yseldar.engine.game.entity.entities.LevelEnd;
 import _47b3n.yseldar.engine.gamestate.gamestates.InGame;
 import _47b3n.yseldar.engine.gfx.ImageLoader;
@@ -23,6 +24,8 @@ public class Player {
 
 	private InGame inGame;
 	private LinkedList<Entity> entities;
+
+	private boolean attack;
 
 	public Player(int x, int y, InGame inGame) {
 		this.x = x;
@@ -81,7 +84,12 @@ public class Player {
 
 			if (entities.get(i).getID() == EntityID.Enemy) {
 				if (getBounds().intersects(entities.get(i).getBounds())) {
-					inGame.changeHealth(-0.2F);
+					if (attack) {
+						Enemy enemy = (Enemy) entities.get(i);
+						enemy.changeHealth(-25F);
+					} else {
+						inGame.changeHealth(-0.2F);
+					}
 				} else {
 					inGame.changeHealth(0);
 				}
@@ -92,6 +100,10 @@ public class Player {
 
 	public void render(Graphics g) {
 		g.drawImage(texture, (int) x, (int) y, null);
+	}
+
+	public void attack() {
+		attack = true;
 	}
 
 	public float getX() {
