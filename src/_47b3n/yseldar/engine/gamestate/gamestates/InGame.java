@@ -29,7 +29,7 @@ public class InGame extends GameState {
 	private boolean showHud = true;
 
 	private int level = 1;
-	private int maxLevel = 2;
+	private int maxLevel = 1;
 	
 	private Player player;
 	private Camera cam;
@@ -75,7 +75,9 @@ public class InGame extends GameState {
 		g2d.translate((int) cam.getX(), (int) cam.getY());
 
 		for (int i = 0; i < entities.size(); i++) {
-			entities.get(i).render(g);
+			if (getBounds().intersects(entities.get(i).getBounds())) {				
+				entities.get(i).render(g);
+			}
 		}
 		player.render(g);
 
@@ -135,7 +137,7 @@ public class InGame extends GameState {
 
 	public void levelUp() {
 		level++;
-
+		
 		if (level <= maxLevel) {
 			entities.clear();
 			player.resetHealth();
@@ -144,9 +146,7 @@ public class InGame extends GameState {
 			System.out.println("/levels/level" + level + ".bmp");
 			loadLevel(levelImg);
 		} else {
-			if (Game.DEBUG) {
-				System.out.println("Finish");
-			}
+			System.out.println("Finish");
 		}
 	}
 	
@@ -184,7 +184,7 @@ public class InGame extends GameState {
 	}
 
 	public Rectangle getBounds() {
-		return new Rectangle(0, 0, Game.WIDTH, Game.HEIGHT);
+		return new Rectangle((int) -cam.getX(), (int) -cam.getY(), Game.WIDTH, Game.HEIGHT);
 	}
 
 }
