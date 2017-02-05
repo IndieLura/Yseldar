@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 
 import _47b3n.yseldar.engine.Handler;
 import _47b3n.yseldar.engine.game.Player;
+import _47b3n.yseldar.engine.gamestate.gamestates.InGame;
 
 public class KeyInput implements KeyListener {
 
@@ -19,11 +20,13 @@ public class KeyInput implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 
-		if (handler.getGameState() == handler.getInGame()) {
+		// INGAME CONTROLS
+		if (handler.getGameState() instanceof InGame) {
 
 			// CONTROLS OF PLAYER
-			if (handler.getInGame().getPlayer() != null) {
-				player = handler.getInGame().getPlayer();
+			InGame inGame = (InGame) handler.getGameState();
+			if (inGame.getPlayer() != null) {
+				player = inGame.getPlayer();
 
 				if (key == KeyEvent.VK_W) {
 					player.setVelY(-player.getSpeed());
@@ -40,17 +43,20 @@ public class KeyInput implements KeyListener {
 			}
 			// END OF CONTROLS OF PLAYER
 		}
+		// END OF INGAME CONTROLS
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
 
-		if (handler.getGameState() == handler.getInGame()) {
+		// INGAME CONTROLS
+		if (handler.getGameState() instanceof InGame) {
 
 			// CONTROLS OF PLAYER
-			if (handler.getInGame().getPlayer() != null) {
-				player = handler.getInGame().getPlayer();
+			InGame inGame = (InGame) handler.getGameState();
+			if (inGame.getPlayer() != null) {
+				player = inGame.getPlayer();
 
 				if (key == KeyEvent.VK_W) {
 					player.setVelY(0);
@@ -71,13 +77,14 @@ public class KeyInput implements KeyListener {
 			// END OF CONTROLS OF PLAYER
 
 			if (key == KeyEvent.VK_H) {
-				if (handler.getInGame().showsHud() == true) {
-					handler.getInGame().showHud(false);
-				} else if (handler.getInGame().showsHud() == false) {
-					handler.getInGame().showHud(true);
+				if (inGame.showsHud() == true) {
+					inGame.showHud(false);
+				} else if (inGame.showsHud() == false) {
+					inGame.showHud(true);
 				}
 			}
 		}
+		// END OF INGAME CONTROLS
 
 		if (key == KeyEvent.VK_ESCAPE) {
 			System.exit(1);

@@ -25,21 +25,18 @@ import _47b3n.yseldar.engine.gfx.ImageLoader;
 
 public class InGame extends GameState {
 
-	private Player player;
-
 	private Font fontHud;
 	private boolean showHud = true;
 
-	private Camera cam;
-
 	private int level = 1;
 	private int maxLevel = 2;
-
+	
+	private Player player;
+	private Camera cam;
+	
 	public LinkedList<Entity> entities = new LinkedList<Entity>();
 
-	private float health = 100;
-
-	private GradientPaint gradient;
+	private GradientPaint backgroundGradient;
 
 	public InGame() {
 		BufferedImage level1 = ImageLoader.loadImage("/levels/level1.bmp");
@@ -49,7 +46,7 @@ public class InGame extends GameState {
 		fontHud = new Font("Verdana", Font.PLAIN, 12);
 		cam = new Camera(0, 0);
 
-		gradient = new GradientPaint(0, 0, new Color(100, 200, 244), 0, Game.HEIGHT + 400, new Color(84, 167, 204));
+		backgroundGradient = new GradientPaint(0, 0, new Color(100, 200, 244), 0, Game.HEIGHT + 400, new Color(84, 167, 204));
 	}
 
 	@Override
@@ -60,11 +57,8 @@ public class InGame extends GameState {
 			entities.get(i).tick();
 		}
 
-		if (health <= 0)
-			System.exit(1);
-
-		if (health < 0)
-			health = 0;
+		if (player.getHealth() <= 0)
+			restartLevel();
 	}
 
 	@Override
@@ -73,7 +67,7 @@ public class InGame extends GameState {
 		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_GASP);
 
 		// START OF BACKGROUND
-		g2d.setPaint(gradient);
+		g2d.setPaint(backgroundGradient);
 		g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
 		// END OF BACKGROUND
 
@@ -86,7 +80,6 @@ public class InGame extends GameState {
 		player.render(g);
 
 		g2d.translate((int) -cam.getX(), (int) -cam.getY());
-
 		// TO HERE
 
 		// START OF HUD
@@ -100,7 +93,7 @@ public class InGame extends GameState {
 			g.drawString("HEALTH: ", 10, Game.HEIGHT - 10);
 
 			g.setColor(Color.GREEN);
-			g.fillRect(70, Game.HEIGHT - 21, (int) health, 12);
+			g.fillRect(70, Game.HEIGHT - 21, (int) player.getHealth(), 12);
 
 			g.setColor(Color.BLACK);
 			g.drawRect(70, Game.HEIGHT - 21, 100, 12);
@@ -145,13 +138,25 @@ public class InGame extends GameState {
 
 		if (level <= maxLevel) {
 			entities.clear();
-
+			player.resetHealth();
+			
 			BufferedImage levelImg = ImageLoader.loadImage("/levels/level" + level + ".bmp");
 			System.out.println("/levels/level" + level + ".bmp");
 			loadLevel(levelImg);
 		} else {
-			System.out.println("Finish");
+			if (Game.DEBUG) {
+				System.out.println("Finish");
+			}
 		}
+	}
+	
+	private void restartLevel() {
+		entities.clear();
+		player.resetHealth();
+
+		BufferedImage levelImg = ImageLoader.loadImage("/levels/level" + level + ".bmp");
+		System.out.println("/levels/level" + level + ".bmp");
+		loadLevel(levelImg);
 	}
 
 	public LinkedList<Entity> getEntities() {
@@ -173,11 +178,7 @@ public class InGame extends GameState {
 	public boolean showsHud() {
 		return showHud;
 	}
-
-	public void changeHealth(float number) {
-		health += number;
-	}
-
+	
 	public Player getPlayer() {
 		return player;
 	}

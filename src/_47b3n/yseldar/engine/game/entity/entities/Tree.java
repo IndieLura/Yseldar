@@ -37,13 +37,5 @@ public class Tree extends Entity {
 	public Rectangle getBounds() {
 		return new Rectangle((int) x, (int) y, (int) width, (int) height);
 	}
-
-	public float getWidth() {
-		return width;
-	}
-
-	public float getHeight() {
-		return height;
-	}
-
+	
 }

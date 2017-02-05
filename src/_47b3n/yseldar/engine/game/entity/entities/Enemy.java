@@ -1,9 +1,9 @@
 package _47b3n.yseldar.engine.game.entity.entities;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+
 import java.util.LinkedList;
 
 import _47b3n.yseldar.engine.game.Player;
@@ -17,7 +17,7 @@ public class Enemy extends Entity {
 
 	private float speed = 1;
 	private float health = 100;
-	private int resize = 64;
+	private float spriteWidth = 32, spriteHeight = 32;
 
 	private Player player;
 	private LinkedList<Entity> entities;
@@ -30,7 +30,7 @@ public class Enemy extends Entity {
 		width = 32;
 		height = 32;
 
-		texture = SpriteSheet.grabImage(ImageLoader.loadImage("/gfx/sheet.png"), 9, 1, (int) width, (int) height);
+		texture = SpriteSheet.grabImage(ImageLoader.loadImage("/gfx/sheet.png"), 9, 1, (int) spriteWidth, (int) spriteHeight);
 		
 		entities = inGame.getEntities();
 	}
@@ -100,23 +100,35 @@ public class Enemy extends Entity {
 
 	@Override
 	public void render(Graphics g) {
-		// HEALTH BAR
+		g.drawImage(texture, (int) x, (int) y, (int) width, (int) height, null);
+		
+		/*// HEALTH BAR
 		g.setColor(Color.GREEN);
 		g.fillRect((int) x + 7, (int) y - 15, (int) health / 2, 12);
 
 		g.setColor(Color.BLACK);
 		g.drawRect((int) x + 7, (int) y - 15, 50, 12); 
-		// END OF HEALTH BAR
-
-		g.drawImage(texture, (int) x, (int) y, resize, resize, null);
+		// END OF HEALTH BAR*/
 	}
 
+	public float getHealth() {
+		return health;
+	}
+	
 	public void changeHealth(float health) {
 		this.health += health;
 	}
 
 	public void setPlayer(Player player) {
 		this.player = player;
+	}
+	
+	private Rectangle getRadius() {
+		return new Rectangle((int) x + ((int) width / 2) - 300, (int) y + ((int) height / 2) - 300, 600, 600);
+	}
+	
+	private boolean playerNearby() {
+		return getRadius().intersects(player.getBounds());
 	}
 
 	@Override
@@ -141,13 +153,4 @@ public class Enemy extends Entity {
 	private Rectangle getBoundsLeft() {
 		return new Rectangle((int) x, (int) y + 5, (int) 5, (int) height - 10);
 	}
-
-	private Rectangle getRadius() {
-		return new Rectangle((int) x + ((int) width / 2) - 300, (int) y + ((int) height / 2) - 300, 600, 600);
-	}
-
-	private boolean playerNearby() {
-		return getRadius().intersects(player.getBounds());
-	}
-
 }

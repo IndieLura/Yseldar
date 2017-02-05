@@ -8,11 +8,9 @@ import _47b3n.yseldar.engine.gamestate.gamestates.InGame;
 public class Handler {
 
 	private GameState gameState;
-	private InGame inGame;
 
 	public Handler() {
-		inGame = new InGame();
-		setGameState(inGame);
+		setGameState(new InGame());
 	}
 
 	public void tick() {
@@ -30,9 +28,4 @@ public class Handler {
 	public GameState getGameState() {
 		return gameState;
 	}
-
-	public InGame getInGame() {
-		return inGame;
-	}
-
 }

@@ -19,6 +19,7 @@ public class Player {
 	private float velX, velY;
 	private float width = 32, height = 32;
 	private float speed = 4;
+	private float health = 100;
 
 	private BufferedImage texture;
 
@@ -89,10 +90,10 @@ public class Player {
 						enemy.changeHealth(-25F);
 						attack = false;
 					} else {
-						inGame.changeHealth(-0.2F);
+						changeHealth(-0.2F);
 					}
 				} else {
-					inGame.changeHealth(0);
+					changeHealth(0);
 				}
 			}
 
@@ -155,6 +156,18 @@ public class Player {
 		this.speed = speed;
 	}
 
+	public float getHealth() {
+		return health;
+	}
+	
+	public void resetHealth() {
+		health = 100;
+	}
+	
+	public void changeHealth(float health) {
+		this.health += health;
+	}
+	
 	public Rectangle getBounds() {
 		return new Rectangle((int) x, (int) y, (int) width, (int) height);
 	}

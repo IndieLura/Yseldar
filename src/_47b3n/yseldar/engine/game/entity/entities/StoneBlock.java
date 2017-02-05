@@ -38,12 +38,4 @@ public class StoneBlock extends Entity {
 		return new Rectangle((int) x, (int) y, (int) width, (int) height);
 	}
 
-	public float getWidth() {
-		return width;
-	}
-
-	public float getHeight() {
-		return height;
-	}
-
 }
