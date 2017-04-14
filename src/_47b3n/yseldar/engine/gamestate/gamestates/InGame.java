@@ -29,7 +29,7 @@ public class InGame extends GameState {
 	private boolean showHud = true;
 
 	private int level = 1;
-	private int maxLevel = 1;
+	private int maxLevel = 2;
 	
 	private Player player;
 	private Camera cam;
